@@ -1,3 +1,36 @@
 img {
-    height: 180px;
+    height: 200px;
+}
+
+body {
+    text-align: center;
+    background-color: rgb(1,50,32);
+    color: white;
+}
+
+h1 {
+    text-align:left;
+    width: 240px;
+    background-color: darkred;
+    padding: 15px;
+}
+
+table, tr, th, td {
+    border: 3px solid white;
+}
+
+th{
+    font-size: 30px;
+    padding: 5px;
+    background-color: darkgray;
+    color: darkblue
+}
+
+button {
+    background-color: darkred;
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 10px
 }
