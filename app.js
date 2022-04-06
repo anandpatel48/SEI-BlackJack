@@ -101,16 +101,27 @@ function dealerDraw(){
     
 }
 
-function values(){
+function totals(){
     let pv1 = playerHand[0].split("-")[0]
     let pv2 = playerHand[1].split("-")[0]
+    let dv1 = dealerHand[0].split("-")[0]
+    let dv2 = dealerHand[1].split("-")[0]
+    // console.log(pv1)
+    // console.log(pv2)
     if(pv1 === "K" || pv1 === "Q" || pv1 === "J"){
         pv1 = 10
-    } else if(pv2 === "K" || pv2 === "Q" || pv2 === "J"){
+    }if(pv2 === "K" || pv2 === "Q" || pv2 === "J"){
         pv2 = 10
     }
+    if(dv1 === "K" || dv1 === "Q" || dv1 === "J"){
+        dv1 = 10
+    }if(dv2 === "K" || dv2 === "Q" || dv2 === "J"){
+        dv2 = 10
+    }
     playerTotal = parseInt(pv1) + parseInt(pv2)
+    dealerTotal = parseInt(dv1) + parseInt(dv2)
     console.log(playerTotal)
+    console.log(dealerTotal)
 }
 
-values()
+totals()
