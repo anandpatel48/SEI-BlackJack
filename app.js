@@ -12,9 +12,11 @@ const wager = document.querySelector('.wager')
 const balance = document.querySelector('.balance')
 // console.log(balance)
 
-//creating a variable to get player-info from dom
+//creating a variable to get player-info and dealer-info from dom
 const playerSection = document.querySelector('.player-info')
 console.log(playerSection)
+const dealerSection = document.querySelector('.dealer-info')
+console.log(dealerSection)
 
 //declaring a function to open game so it can be called when the reset button is hit
 function openGame(){
@@ -22,6 +24,7 @@ function openGame(){
     shuffle()
     wager.innerHTML = 100;
     balance.innerHTML = 900;
+    dealerDraw()
     playerDraw()
 }
 
@@ -71,16 +74,43 @@ function shuffle(){
 //pc1 and pc2 are to reflect the images for the players cards
 
 function playerDraw(){
-    let playerHand = []
+    playerHand = []
     for (let i = 0; i < 2; i++){
         playerHand[i] = deck.pop()
     }
-    console.log(playerHand)
+    // console.log(playerHand)
+    //add to player total
     let pc1 = document.createElement("img")
     pc1.src = "./cards/" + playerHand[0] + ".png"
     playerSection.append(pc1)
     let pc2 = document.createElement('img')
     pc2.src = "./cards/" + playerHand[1] + ".png"
     playerSection.append(pc2)
+    return playerHand
 }
 
+function dealerDraw(){
+    dealerHand = []
+    for (let i = 0; i < 2; i++){
+        dealerHand[i] = deck.pop()
+    }
+    // console.log(dealerHand)
+    let dc2 = document.createElement("img")
+    dc2.src = "./cards/" + dealerHand[1] + ".png"
+    dealerSection.append(dc2)
+    
+}
+
+function values(){
+    let pv1 = playerHand[0].split("-")[0]
+    let pv2 = playerHand[1].split("-")[0]
+    if(pv1 === "K" || pv1 === "Q" || pv1 === "J"){
+        pv1 = 10
+    } else if(pv2 === "K" || pv2 === "Q" || pv2 === "J"){
+        pv2 = 10
+    }
+    playerTotal = parseInt(pv1) + parseInt(pv2)
+    console.log(playerTotal)
+}
+
+values()
