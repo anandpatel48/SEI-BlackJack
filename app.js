@@ -12,12 +12,17 @@ const wager = document.querySelector('.wager')
 const balance = document.querySelector('.balance')
 // console.log(balance)
 
+//creating a variable to get player-info from dom
+const playerSection = document.querySelector('.player-info')
+console.log(playerSection)
+
 //declaring a function to open game so it can be called when the reset button is hit
 function openGame(){
     makeDeck()
     shuffle()
     wager.innerHTML = 100;
     balance.innerHTML = 900;
+    playerDraw()
 }
 
 openGame()
@@ -59,5 +64,23 @@ function shuffle(){
         deck[randomIndex] = temp
     }
     console.log(deck)
+}
+
+// testing to see if deck.pop retrieves a hand
+// console.log(deck.pop())
+//pc1 and pc2 are to reflect the images for the players cards
+
+function playerDraw(){
+    let playerHand = []
+    for (let i = 0; i < 2; i++){
+        playerHand[i] = deck.pop()
+    }
+    console.log(playerHand)
+    let pc1 = document.createElement("img")
+    pc1.src = "./cards/" + playerHand[0] + ".png"
+    playerSection.append(pc1)
+    let pc2 = document.createElement('img')
+    pc2.src = "./cards/" + playerHand[1] + ".png"
+    playerSection.append(pc2)
 }
 
