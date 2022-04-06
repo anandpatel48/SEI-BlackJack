@@ -112,16 +112,25 @@ function totals(){
         pv1 = 10
     }if(pv2 === "K" || pv2 === "Q" || pv2 === "J"){
         pv2 = 10
+    }if(pv1 === "A"){
+        pv1 =11
+    }if(pv2 === "A"){
+        pv2 = 11
     }
     if(dv1 === "K" || dv1 === "Q" || dv1 === "J"){
         dv1 = 10
     }if(dv2 === "K" || dv2 === "Q" || dv2 === "J"){
         dv2 = 10
     }
+    if(dv1 === "A"){
+        dv1 =11
+    }if(dv2 === "A"){
+        dv2 = 11
+    }
     playerTotal = parseInt(pv1) + parseInt(pv2)
     dealerTotal = parseInt(dv1) + parseInt(dv2)
-    console.log(playerTotal)
     console.log(dealerTotal)
+    console.log(playerTotal)
 }
 
 totals()
