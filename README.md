@@ -45,8 +45,14 @@ From the randomized deck, the player will receive two images linked to the first
 If the player presses the hit button, they will be shown another card and the value of it will be added to the players value. If the card is an ace, will need to make it default to a value of 10, and then make it a 1 if the total eclipses 21 when it is a 10 and is less than 21 when it is a 1. 
 If the player clicks this button and the value is above 21, the player automatically loses. The balance is subtracted by 100. 
 
+If the player busts, a message saying "hand lost" should appear and a new hand for both player and dealer will be shown.
+If the player gets 21, a message saying "blackjack!" should appear and 100 added to their balance. New hands will appear from the deck.
+
 --stay button--
 When the player selects this, their total is locked in for that hand. The dealer then shows their face down card. The if the dealer is below the player total, the dealer will get another card. If the dealer total is closer to 21 without passing it, they win and player balance goes down 100. If the dealer is still below the player total, they must keep hitting until they either get closer to 21 or pass it, in which case they lose. 
+
+If the dealer wins the hand, a message saying "you lost" should appear, 100 deducted from balance, and new hands will appear.
+If the dealer busts, a message saying "you win!" should appear, 100 added to the balance, and new hands will appear. 
 
 --reset button--
 If the player clicks reset, balance goes back to 900, a new deck is created and shuffled, and the game starts again. 
