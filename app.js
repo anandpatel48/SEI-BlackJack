@@ -172,7 +172,8 @@ hitButton.addEventListener('click', ()=>{
 })
 
 function dealerMove() {
-    if (dealerTotal < 16) {
+    for (let i = 0; i<10; i++){
+    if (dealerTotal < 16 || dealerTotal === playerTotal) {
         let newCard = deck.pop()
         dealerHand.push(newCard);
         dealerTotal+= parseInt(newCard.split("-")[0])
@@ -182,6 +183,7 @@ function dealerMove() {
         cardImg.src = "./cards/" + newCard + ".png"
         dealerSection.append(cardImg)
     }
+}
     let back = document.querySelector('.back')
     back.src = "./cards/" + dealerHand[0] + ".png"
 }
@@ -189,7 +191,7 @@ function dealerMove() {
 const stayButton = document.querySelector('.stay')
 
 stayButton.addEventListener('click', ()=>{
-    if (playerTotal < 21){
+    if (playerTotal <= 21){
         dealerMove()
         playerTurn = false
         winner()
@@ -212,5 +214,5 @@ function winner(){
     } else if (dealerTotal > 21) {
         message.innerHTML = "you win!"
         balanceDOM.innerHTML = balance + 100
-    }
+    } 
 }
