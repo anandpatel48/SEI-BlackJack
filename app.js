@@ -162,14 +162,13 @@ hitButton.addEventListener('click', ()=>{
         playerSection.append(cardImg)
         
     } else {
-        dealerMove()
+        winner()
     }  
     
 })
 
 function dealerMove() {
-    for (let i = 0; i<10; i++){
-    if (dealerTotal < 16 || dealerTotal <= playerTotal && dealerTotal <= 21 && playerTotal < 21) {
+    if (dealerTotal <= playerTotal && dealerTotal <= 21 && playerTotal < 21) {
         let newCard = deck.pop()
         dealerHand.push(newCard);
         dealerTotal+= parseInt(newCard.split("-")[0])
@@ -177,19 +176,21 @@ function dealerMove() {
         cardImg.src = "./cards/" + newCard + ".png"
         dealerSection.append(cardImg)
     } 
-}
+        console.log(dealerTotal)
+        winner()
+        // console.log(dealerHand)
+        // console.log(dealerTotal)
+        let back = document.querySelector('.back')
+        back.src = "./cards/" + dealerHand[0] + ".png"
 
-    // console.log(dealerHand)
-    // console.log(dealerTotal)
-    let back = document.querySelector('.back')
-    back.src = "./cards/" + dealerHand[0] + ".png"
-    winner()
 }
 
 const stayButton = document.querySelector('.stay')
 
 stayButton.addEventListener('click', ()=>{
         dealerMove()
+        playerTotal = playerTotal
+        console.log(playerTotal)
 })
 
 const winnerMessage = document.querySelector('.winner-message')
@@ -207,7 +208,7 @@ function winner(){
     } else if (playerTotal === 21){
         winnerMessage.innerHTML = "BlackJack";
         balanceDOM.innerHTML = balance + 100
-    } else if (dealerTotal > 21) {
+    } else if (dealerTotal > 21 && playerTotal <= 21) {
         winnerMessage.innerHTML = "you win! the dealer busted"
         balanceDOM.innerHTML = balance + 100
     } 
