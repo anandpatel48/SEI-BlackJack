@@ -105,39 +105,54 @@ function dealerDraw(){
     
 }
 
-function totals(){
-    pv1 = playerHand[0].split("-")[0]
-    pv2 = playerHand[1].split("-")[0]
-    dv1 = dealerHand[0].split("-")[0]
-    dv2 = dealerHand[1].split("-")[0]
-    // console.log(pv1)
-    // console.log(pv2)
-    if(pv1 === "K" || pv1 === "Q" || pv1 === "J"){
-        pv1 = 10
-    }if(pv2 === "K" || pv2 === "Q" || pv2 === "J"){
-        pv2 = 10
-    }if(pv1 === "A"){
-        pv1 =11
-    }if(pv2 === "A"){
-        pv2 = 11
+// function totals(){
+//     pv1 = playerHand[0].split("-")[0]
+//     pv2 = playerHand[1].split("-")[0]
+//     dv1 = dealerHand[0].split("-")[0]
+//     dv2 = dealerHand[1].split("-")[0]
+//     // console.log(pv1)
+//     // console.log(pv2)
+//     if(pv1 === "K" || pv1 === "Q" || pv1 === "J"){
+//         pv1 = 10
+//     }if(pv2 === "K" || pv2 === "Q" || pv2 === "J"){
+//         pv2 = 10
+//     }if(pv1 === "A"){
+//         pv1 =11
+//     }if(pv2 === "A"){
+//         pv2 = 11
+//     }
+//     if(dv1 === "K" || dv1 === "Q" || dv1 === "J"){
+//         dv1 = 10
+//     }if(dv2 === "K" || dv2 === "Q" || dv2 === "J"){
+//         dv2 = 10
+//     }
+//     if(dv1 === "A"){
+//         dv1 =11
+//     }if(dv2 === "A"){
+//         dv2 = 11
+//     }
+//     playerTotal = parseInt(pv1) + parseInt(pv2)
+//     dealerTotal = parseInt(dv1) + parseInt(dv2)
+//     // console.log(dealerTotal)
+//     // console.log(playerTotal)
+// }
+
+// totals()
+
+function playerSum(){
+    for (let i = 0; i < playerHand.length; i++){
+        if(playerHand[i].split("-")[0]=== "K" || playerHand[i].split("-")[0]=== "Q" || playerHand[i].split("-")[0]=== "J") {
+            playerTotal += 10
+        } else if(playerHand[i].split("-")[0]=== "A") {
+            playerTotal += 11
+        } else playerTotal+= parseInt(playerHand[i].split("-")[0])
     }
-    if(dv1 === "K" || dv1 === "Q" || dv1 === "J"){
-        dv1 = 10
-    }if(dv2 === "K" || dv2 === "Q" || dv2 === "J"){
-        dv2 = 10
-    }
-    if(dv1 === "A"){
-        dv1 =11
-    }if(dv2 === "A"){
-        dv2 = 11
-    }
-    playerTotal = parseInt(pv1) + parseInt(pv2)
-    dealerTotal = parseInt(dv1) + parseInt(dv2)
-    // console.log(dealerTotal)
-    // console.log(playerTotal)
+    console.log(playerTotal)
 }
 
-totals()
+
+
+
 
 // console.log(playerTotal)
 
@@ -147,6 +162,9 @@ const hit = document.querySelector('.hit')
 const message = document.querySelector(".message")
 // console.log(hit)
 
+//IDEA: change totals function to be a loop and add conditions for face cards and Ace = to 10
+//call this function in the hit function after player hand .push
+
 
 
 let hitButton = document.querySelector('.hit')
@@ -155,7 +173,7 @@ hitButton.addEventListener('click', ()=>{
     if (playerTotal <=21){
         let newCard = deck.pop()
         playerHand.push(newCard);
-        playerTotal+= parseInt(newCard.split("-")[0])
+        playerSum()
         // console.log(playerTotal)
         var cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
@@ -188,9 +206,8 @@ function dealerMove() {
 const stayButton = document.querySelector('.stay')
 
 stayButton.addEventListener('click', ()=>{
-        dealerMove()
-        playerTotal = playerTotal
-        console.log(playerTotal)
+    playerSum()    
+    dealerMove()
 })
 
 const winnerMessage = document.querySelector('.winner-message')
