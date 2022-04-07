@@ -152,7 +152,7 @@ const message = document.querySelector(".message")
 let hitButton = document.querySelector('.hit')
 
 hitButton.addEventListener('click', ()=>{
-    if (playerTotal <21){
+    if (playerTotal <=21){
         let newCard = deck.pop()
         playerHand.push(newCard);
         playerTotal+= parseInt(newCard.split("-")[0])
@@ -162,57 +162,55 @@ hitButton.addEventListener('click', ()=>{
         playerSection.append(cardImg)
         
     } else {
-        message.innerHTML = "you can not hit";
-        // console.log(playerTotal)
         dealerMove()
-        playerTurn = false
-        winner()
     }  
     
 })
 
 function dealerMove() {
     for (let i = 0; i<10; i++){
-    if (dealerTotal < 16 || dealerTotal === playerTotal) {
+    if (dealerTotal < 16 || dealerTotal <= playerTotal && dealerTotal <= 21 && playerTotal < 21) {
         let newCard = deck.pop()
         dealerHand.push(newCard);
         dealerTotal+= parseInt(newCard.split("-")[0])
-        console.log(dealerHand)
-        console.log(dealerTotal)
         var cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
         dealerSection.append(cardImg)
-    }
+    } 
 }
+
+    // console.log(dealerHand)
+    // console.log(dealerTotal)
     let back = document.querySelector('.back')
     back.src = "./cards/" + dealerHand[0] + ".png"
+    winner()
 }
 
 const stayButton = document.querySelector('.stay')
 
 stayButton.addEventListener('click', ()=>{
-    if (playerTotal <= 21){
         dealerMove()
-        playerTurn = false
-        winner()
-    }
 })
 
+const winnerMessage = document.querySelector('.winner-message')
+
 function winner(){
-    if (playerTotal<21 && playerTotal > dealerTotal){
-        message.innerHTML = "you win!";
+    if (playerTotal<21 && dealerTotal < 21 && playerTotal > dealerTotal){
+        winnerMessage.innerHTML = "you win!";
         balanceDOM.innerHTML = balance + 100
     } else if (playerTotal > 21) {
-        message.innerHTML = "you busted";
+        winnerMessage.innerHTML = "you busted";
         balanceDOM.innerHTML = balance - 100
     } else if (dealerTotal <= 21 && dealerTotal > playerTotal){
-        message.innerHTML = "you  lose";
-        balanceDOM.innerHTML = balance - 100.   
+        winnerMessage.innerHTML = "you  lose";
+        balanceDOM.innerHTML = balance - 100   
     } else if (playerTotal === 21){
-        message.innerHTML = "BlackJack";
+        winnerMessage.innerHTML = "BlackJack";
         balanceDOM.innerHTML = balance + 100
     } else if (dealerTotal > 21) {
-        message.innerHTML = "you win!"
+        winnerMessage.innerHTML = "you win! the dealer busted"
         balanceDOM.innerHTML = balance + 100
     } 
 }
+
+//having trouble to get the dealer busted message  to work
