@@ -4,7 +4,7 @@ let playerTotal = 0
 let dealerTotal = 0
 
 //for the hit button, set allowedToHit equal to true and make it false if playerTotal is at or above 21
-let allowedToHit = true
+let playerTurn = true
 
 //declaring wager and balance from DOM
 const wagerDOM = document.querySelector('.wager')
@@ -165,6 +165,8 @@ hitButton.addEventListener('click', ()=>{
         message.innerHTML = "you can not hit";
         // console.log(playerTotal)
         dealerMove()
+        playerTurn = false
+        winner()
     }  
     
 })
@@ -180,5 +182,35 @@ function dealerMove() {
         cardImg.src = "./cards/" + newCard + ".png"
         dealerSection.append(cardImg)
     }
+    let back = document.querySelector('.back')
+    back.src = "./cards/" + dealerHand[0] + ".png"
 }
 
+const stayButton = document.querySelector('.stay')
+
+stayButton.addEventListener('click', ()=>{
+    if (playerTotal < 21){
+        dealerMove()
+        playerTurn = false
+        winner()
+    }
+})
+
+function winner(){
+    if (playerTotal<21 && playerTotal > dealerTotal){
+        message.innerHTML = "you win!";
+        balanceDOM.innerHTML = balance + 100
+    } else if (playerTotal > 21) {
+        message.innerHTML = "you busted";
+        balanceDOM.innerHTML = balance - 100
+    } else if (dealerTotal <= 21 && dealerTotal > playerTotal){
+        message.innerHTML = "you  lose";
+        balanceDOM.innerHTML = balance - 100.   
+    } else if (playerTotal === 21){
+        message.innerHTML = "BlackJack";
+        balanceDOM.innerHTML = balance + 100
+    } else if (dealerTotal > 21) {
+        message.innerHTML = "you win!"
+        balanceDOM.innerHTML = balance + 100
+    }
+}
