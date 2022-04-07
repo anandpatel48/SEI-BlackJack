@@ -142,14 +142,27 @@ function dealerDraw(){
 function playerSum(){
     for (let i = 0; i < playerHand.length; i++){
         if(playerHand[i].split("-")[0]=== "K" || playerHand[i].split("-")[0]=== "Q" || playerHand[i].split("-")[0]=== "J") {
-            playerTotal += 10
+            playerTotal += 10;
         } else if(playerHand[i].split("-")[0]=== "A") {
-            playerTotal += 11
+            playerTotal += 11;
         } else playerTotal+= parseInt(playerHand[i].split("-")[0])
     }
-    console.log(playerTotal)
+    // console.log(playerTotal)
+}
+function dealerSum(){
+    for (let i = 0; i < dealerHand.length; i++){
+        if(dealerHand[i].split("-")[0]=== "K" || dealerHand[i].split("-")[0]=== "Q" || dealerHand[i].split("-")[0]=== "J") {
+            playerTotal += 10
+        } else if(dealerHand[i].split("-")[0]=== "A") {
+            dealerTotal += 11
+        } else dealerTotal+= parseInt(dealerHand[i].split("-")[0])
+    }
+    // console.log(dealerTotal)
 }
 
+
+playerSum()
+dealerSum()
 
 
 
@@ -173,14 +186,13 @@ hitButton.addEventListener('click', ()=>{
     if (playerTotal <=21){
         let newCard = deck.pop()
         playerHand.push(newCard);
-        playerSum()
         // console.log(playerTotal)
         var cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
         playerSection.append(cardImg)
         
     } else {
-        winner()
+        dealerMove()
     }  
     
 })
@@ -189,15 +201,16 @@ function dealerMove() {
     if (dealerTotal <= playerTotal && dealerTotal <= 21 && playerTotal < 21) {
         let newCard = deck.pop()
         dealerHand.push(newCard);
-        dealerTotal+= parseInt(newCard.split("-")[0])
+        // dealerSum();
         var cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
         dealerSection.append(cardImg)
     } 
-        console.log(dealerTotal)
+
+
+        // console.log(dealerTotal)
         winner()
         // console.log(dealerHand)
-        // console.log(dealerTotal)
         let back = document.querySelector('.back')
         back.src = "./cards/" + dealerHand[0] + ".png"
 
@@ -206,7 +219,7 @@ function dealerMove() {
 const stayButton = document.querySelector('.stay')
 
 stayButton.addEventListener('click', ()=>{
-    playerSum()    
+    // playerSum()    
     dealerMove()
 })
 
