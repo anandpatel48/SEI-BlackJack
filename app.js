@@ -147,20 +147,19 @@ const hit = document.querySelector('.hit')
 const message = document.querySelector(".message")
 // console.log(hit)
 
-function playerHit (){
-    if (playerTotal <= 21){
-        allowedToHit = true
-        playerHand.push(deck.pop())
-        console.log(playerHand[2])
-        let pc3 = document.createElement("img")
-        pc3.src = "./cards/" + playerHand[2] + ".png"
-        playerSection.append(pc3)
-        pv3 = playerHand[2].split("-")[0]
-        playerTotal+=parseInt(pv3)
-        console.log(playerTotal)
-    } else {message.innerHTML = "you can not hit"}
-}
+
 
 let hitButton = document.querySelector('.hit')
 
-hitButton.addEventListener('click', playerHit)
+hitButton.addEventListener('click', ()=>{
+    if (playerTotal <21){
+        let newCard = deck.pop()
+        playerHand.push(newCard);
+        playerTotal+= parseInt(newCard.split("-")[0])
+        console.log(playerTotal)
+        var cardImg = document.createElement("img")
+        cardImg.src = "./cards/" + newCard + ".png"
+        playerSection.append(cardImg)
+        
+    } else message.innerHTML = "you can not hit"  
+})
