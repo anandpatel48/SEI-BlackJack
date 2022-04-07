@@ -7,9 +7,9 @@ let dealerTotal = 0
 let allowedToHit = true
 
 //declaring wager and balance from DOM
-const wager = document.querySelector('.wager')
+const wagerDOM = document.querySelector('.wager')
 // console.log(wager)
-const balance = document.querySelector('.balance')
+const balanceDOM = document.querySelector('.balance')
 // console.log(balance)
 
 //creating a variable to get player-info and dealer-info from dom
@@ -18,12 +18,16 @@ console.log(playerSection)
 const dealerSection = document.querySelector('.dealer-info')
 console.log(dealerSection)
 
+//declaring starting wager and balance
+wager  = 100
+balance = 900
+wagerDOM.innerHTML = wager;
+balanceDOM.innerHTML = balance;
+
 //declaring a function to open game so it can be called when the reset button is hit
 function openGame(){
     makeDeck()
     shuffle()
-    wager.innerHTML = 100;
-    balance.innerHTML = 900;
     dealerDraw()
     playerDraw()
 }
@@ -135,5 +139,28 @@ function totals(){
 
 totals()
 
-console.log(dv1)
-console.log(pv1)
+console.log(playerTotal)
+
+//getting hit from DOM to create a function for hit button
+const hit = document.querySelector('.hit')
+//getting message from DOM to signal player is allowed to hit or not allowed
+const message = document.querySelector(".message")
+// console.log(hit)
+
+function playerHit (){
+    if (playerTotal <= 21){
+        allowedToHit = true
+        playerHand.push(deck.pop())
+        console.log(playerHand[2])
+        let pc3 = document.createElement("img")
+        pc3.src = "./cards/" + playerHand[2] + ".png"
+        playerSection.append(pc3)
+        pv3 = playerHand[2].split("-")[0]
+        playerTotal+=parseInt(pv3)
+        console.log(playerTotal)
+    } else {message.innerHTML = "you can not hit"}
+}
+
+let hitButton = document.querySelector('.hit')
+
+hitButton.addEventListener('click', playerHit)
