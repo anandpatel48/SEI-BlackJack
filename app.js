@@ -14,9 +14,9 @@ const balanceDOM = document.querySelector('.balance')
 
 //creating a variable to get player-info and dealer-info from dom
 const playerSection = document.querySelector('.player-info')
-console.log(playerSection)
+// console.log(playerSection)
 const dealerSection = document.querySelector('.dealer-info')
-console.log(dealerSection)
+// console.log(dealerSection)
 
 //declaring starting wager and balance
 wager  = 100
@@ -70,7 +70,7 @@ function shuffle(){
         deck[i] = deck[randomIndex];
         deck[randomIndex] = temp
     }
-    console.log(deck)
+    // console.log(deck)
 }
 
 // testing to see if deck.pop retrieves a hand
@@ -133,13 +133,13 @@ function totals(){
     }
     playerTotal = parseInt(pv1) + parseInt(pv2)
     dealerTotal = parseInt(dv1) + parseInt(dv2)
-    console.log(dealerTotal)
-    console.log(playerTotal)
+    // console.log(dealerTotal)
+    // console.log(playerTotal)
 }
 
 totals()
 
-console.log(playerTotal)
+// console.log(playerTotal)
 
 //getting hit from DOM to create a function for hit button
 const hit = document.querySelector('.hit')
@@ -156,10 +156,29 @@ hitButton.addEventListener('click', ()=>{
         let newCard = deck.pop()
         playerHand.push(newCard);
         playerTotal+= parseInt(newCard.split("-")[0])
-        console.log(playerTotal)
+        // console.log(playerTotal)
         var cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
         playerSection.append(cardImg)
         
-    } else message.innerHTML = "you can not hit"  
+    } else {
+        message.innerHTML = "you can not hit";
+        // console.log(playerTotal)
+        dealerMove()
+    }  
+    
 })
+
+function dealerMove() {
+    if (dealerTotal < 16) {
+        let newCard = deck.pop()
+        dealerHand.push(newCard);
+        dealerTotal+= parseInt(newCard.split("-")[0])
+        console.log(dealerHand)
+        console.log(dealerTotal)
+        var cardImg = document.createElement("img")
+        cardImg.src = "./cards/" + newCard + ".png"
+        dealerSection.append(cardImg)
+    }
+}
+
