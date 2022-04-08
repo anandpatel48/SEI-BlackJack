@@ -207,6 +207,11 @@ function dealerMove() {
     if (dealerTotal <= playerTotal && dealerTotal <= 21 && playerTotal < 21) {
         let newCard = deck.pop()
         dealerHand.push(newCard);
+        if (newCard.split("-")[0]==="K" || newCard.split("-")[0]==="Q" || newCard.split("-")[0]==="J"){
+            dealerTotal += 10
+        } else if (newCard.split("-")[0]==="A"){
+            dealerTotal+=11
+        } else dealerTotal+= parseInt(newCard.split("-")[0])
         // dealerSum();
         var cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
