@@ -82,8 +82,7 @@ function playerDraw(){
     for (let i = 0; i < 2; i++){
         playerHand[i] = deck.pop()
     }
-    // console.log(playerHand)
-    //add to player total
+    playerSum()
     let pc1 = document.createElement("img")
     pc1.src = "./cards/" + playerHand[0] + ".png"
     playerSection.append(pc1)
@@ -98,7 +97,7 @@ function dealerDraw(){
     for (let i = 0; i < 2; i++){
         dealerHand[i] = deck.pop()
     }
-    // console.log(dealerHand)
+    dealerSum()
     let dc2 = document.createElement("img")
     dc2.src = "./cards/" + dealerHand[1] + ".png"
     dealerSection.append(dc2)
@@ -138,11 +137,14 @@ function dealerDraw(){
 // }
 
 // totals()
+// console.log(playerHand[0].split("-")[0])
+// console.log(playerHand[1].split("-")[0])
 
 function playerSum(){
     for (let i = 0; i < playerHand.length; i++){
         if(playerHand[i].split("-")[0]=== "K" || playerHand[i].split("-")[0]=== "Q" || playerHand[i].split("-")[0]=== "J") {
             playerTotal += 10;
+            // console.log(playerTotal)
         } else if(playerHand[i].split("-")[0]=== "A") {
             playerTotal += 11;
         } else playerTotal+= parseInt(playerHand[i].split("-")[0])
@@ -152,7 +154,7 @@ function playerSum(){
 function dealerSum(){
     for (let i = 0; i < dealerHand.length; i++){
         if(dealerHand[i].split("-")[0]=== "K" || dealerHand[i].split("-")[0]=== "Q" || dealerHand[i].split("-")[0]=== "J") {
-            playerTotal += 10
+            dealerTotal += 10
         } else if(dealerHand[i].split("-")[0]=== "A") {
             dealerTotal += 11
         } else dealerTotal+= parseInt(dealerHand[i].split("-")[0])
@@ -161,8 +163,8 @@ function dealerSum(){
 }
 
 
-playerSum()
-dealerSum()
+// playerSum()
+// dealerSum()
 
 
 
@@ -186,7 +188,11 @@ hitButton.addEventListener('click', ()=>{
     if (playerTotal <=21){
         let newCard = deck.pop()
         playerHand.push(newCard);
-        // console.log(playerTotal)
+        if (newCard.split("-")[0]==="K" || newCard.split("-")[0]==="Q" || newCard.split("-")[0]==="J"){
+            playerTotal += 10
+        } else if (newCard.split("-")[0]==="A"){
+            playerTotal+=11
+        } else playerTotal+= parseInt(newCard.split("-")[0])
         var cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
         playerSection.append(cardImg)
@@ -226,10 +232,20 @@ stayButton.addEventListener('click', ()=>{
 const winnerMessage = document.querySelector('.winner-message')
 
 function winner(){
+    // console.log(playerHand)
+    // console.log(dealerHand)
+    // console.log(dealerTotal)
+    // console.log(playerTotal)
+    // playerSum()
+    // dealerSum()
+    console.log(playerTotal)
+    console.log(dealerTotal)
+    console.log(playerHand)
     if (playerTotal<21 && dealerTotal < 21 && playerTotal > dealerTotal){
         winnerMessage.innerHTML = "you win!";
         balanceDOM.innerHTML = balance + 100
     } else if (playerTotal > 21) {
+        // console.log(playerTotal)
         winnerMessage.innerHTML = "you busted";
         balanceDOM.innerHTML = balance - 100
     } else if (dealerTotal <= 21 && dealerTotal > playerTotal){
