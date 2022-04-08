@@ -13,9 +13,9 @@ const balanceDOM = document.querySelector('.balance')
 // console.log(balance)
 
 //creating a variable to get player-info and dealer-info from dom
-const playerSection = document.querySelector('.player-info')
+const playerSection = document.querySelector('.player-section')
 // console.log(playerSection)
-const dealerSection = document.querySelector('.dealer-info')
+const dealerSection = document.querySelector('.dealer-section')
 // console.log(dealerSection)
 
 //declaring starting wager and balance
@@ -104,41 +104,6 @@ function dealerDraw(){
     
 }
 
-// function totals(){
-//     pv1 = playerHand[0].split("-")[0]
-//     pv2 = playerHand[1].split("-")[0]
-//     dv1 = dealerHand[0].split("-")[0]
-//     dv2 = dealerHand[1].split("-")[0]
-//     // console.log(pv1)
-//     // console.log(pv2)
-//     if(pv1 === "K" || pv1 === "Q" || pv1 === "J"){
-//         pv1 = 10
-//     }if(pv2 === "K" || pv2 === "Q" || pv2 === "J"){
-//         pv2 = 10
-//     }if(pv1 === "A"){
-//         pv1 =11
-//     }if(pv2 === "A"){
-//         pv2 = 11
-//     }
-//     if(dv1 === "K" || dv1 === "Q" || dv1 === "J"){
-//         dv1 = 10
-//     }if(dv2 === "K" || dv2 === "Q" || dv2 === "J"){
-//         dv2 = 10
-//     }
-//     if(dv1 === "A"){
-//         dv1 =11
-//     }if(dv2 === "A"){
-//         dv2 = 11
-//     }
-//     playerTotal = parseInt(pv1) + parseInt(pv2)
-//     dealerTotal = parseInt(dv1) + parseInt(dv2)
-//     // console.log(dealerTotal)
-//     // console.log(playerTotal)
-// }
-
-// totals()
-// console.log(playerHand[0].split("-")[0])
-// console.log(playerHand[1].split("-")[0])
 
 function playerSum(){
     for (let i = 0; i < playerHand.length; i++){
@@ -212,16 +177,11 @@ function dealerMove() {
         } else if (newCard.split("-")[0]==="A"){
             dealerTotal+=11
         } else dealerTotal+= parseInt(newCard.split("-")[0])
-        // dealerSum();
         var cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
         dealerSection.append(cardImg)
     } 
-
-
-        // console.log(dealerTotal)
         winner()
-        // console.log(dealerHand)
         let back = document.querySelector('.back')
         back.src = "./cards/" + dealerHand[0] + ".png"
 
@@ -229,23 +189,15 @@ function dealerMove() {
 
 const stayButton = document.querySelector('.stay')
 
-stayButton.addEventListener('click', ()=>{
-    // playerSum()    
+stayButton.addEventListener('click', ()=>{   
     dealerMove()
 })
 
 const winnerMessage = document.querySelector('.winner-message')
 
 function winner(){
-    // console.log(playerHand)
-    // console.log(dealerHand)
-    // console.log(dealerTotal)
-    // console.log(playerTotal)
-    // playerSum()
-    // dealerSum()
-    console.log(playerTotal)
-    console.log(dealerTotal)
     console.log(playerHand)
+    console.log(playerTotal)
     if (playerTotal<21 && dealerTotal < 21 && playerTotal > dealerTotal){
         winnerMessage.innerHTML = "you win!";
         balanceDOM.innerHTML = balance + 100
@@ -262,7 +214,9 @@ function winner(){
     } else if (dealerTotal > 21 && playerTotal <= 21) {
         winnerMessage.innerHTML = "you win! the dealer busted"
         balanceDOM.innerHTML = balance + 100
-    } 
-}
+    }
+    playerDraw()
+    dealerDraw()
+    console.log(playerHand)
 
-//having trouble to get the dealer busted message  to work
+}
