@@ -223,6 +223,7 @@ resetButton.addEventListener('click', reset)
 function reset(){
     document.getElementById("back").src = "./cards/back.png"
     creditsMessage.innerHTML = ""
+    deckSignal.innerHTML = "New Deck"
     playerTotal = 0
     dealerTotal = 0
     wager = 100
