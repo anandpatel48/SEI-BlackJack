@@ -158,6 +158,11 @@ hitButton.addEventListener('click', ()=>{
         } else if (newCard.split("-")[0]==="A"){
             playerTotal+=11
         } else playerTotal+= parseInt(newCard.split("-")[0])
+        for (let i = 0; i < playerHand.length; i++){
+            if (playerHand[i]==="A" && playerTotal > 21){
+                playerTotal-=10
+            }
+        }
         var cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
         playerSection.append(cardImg)
@@ -177,6 +182,12 @@ function dealerMove() {
         } else if (newCard.split("-")[0]==="A"){
             dealerTotal+=11
         } else dealerTotal+= parseInt(newCard.split("-")[0])
+    
+        for (let i = 0; i < dealerHand.length; i++){
+            if (dealerHand[i]==="A" && dealerTotal > 21){
+                dealerTotal-=10
+            }
+        }
         var cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
         dealerSection.append(cardImg)
@@ -215,8 +226,10 @@ function winner(){
         winnerMessage.innerHTML = "you win! the dealer busted"
         balanceDOM.innerHTML = balance + 100
     }
-    playerDraw()
-    dealerDraw()
-    console.log(playerHand)
+    // playerDraw()
+    // dealerDraw()
+    // console.log(playerHand)
+
 
 }
+
