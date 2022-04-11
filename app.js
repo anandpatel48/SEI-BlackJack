@@ -24,6 +24,10 @@ balance = 900
 wagerDOM.innerHTML = wager;
 balanceDOM.innerHTML = balance;
 
+//creared img elements in player-section of HTML for card pictures to be displayed. Calling them here so card images can be displayed
+
+
+
 //declaring a function to open game so it can be called when the reset button is hit
 function openGame(){
     makeDeck()
@@ -54,12 +58,7 @@ function makeDeck(){
     }
 
 }
-//console log makeDeck() to make sure it works
-// console.log(makeDeck())
 
-// console.log(makeDeck())
-
-// console.log(test)
 //create a function to shuffle deck
 function shuffle(){
     for (let i = 0; i <deck.length; i++){
@@ -114,7 +113,7 @@ function playerSum(){
             playerTotal += 11;
         } else playerTotal+= parseInt(playerHand[i].split("-")[0])
     }
-    // console.log(playerTotal)
+    console.log(playerTotal)
 }
 function dealerSum(){
     for (let i = 0; i < dealerHand.length; i++){
@@ -124,7 +123,7 @@ function dealerSum(){
             dealerTotal += 11
         } else dealerTotal+= parseInt(dealerHand[i].split("-")[0])
     }
-    // console.log(dealerTotal)
+    console.log(dealerTotal)
 }
 
 
@@ -150,14 +149,11 @@ const message = document.querySelector(".message")
 let hitButton = document.querySelector('.hit')
 
 hitButton.addEventListener('click', ()=>{
-    if (playerTotal <=21){
+    playerTotal = 0
+    if (playerTotal <21){
         let newCard = deck.pop()
         playerHand.push(newCard);
-        if (newCard.split("-")[0]==="K" || newCard.split("-")[0]==="Q" || newCard.split("-")[0]==="J"){
-            playerTotal += 10
-        } else if (newCard.split("-")[0]==="A"){
-            playerTotal+=11
-        } else playerTotal+= parseInt(newCard.split("-")[0])
+        playerSum()
         for (let i = 0; i < playerHand.length; i++){
             if (playerHand[i]==="A" && playerTotal > 21){
                 playerTotal-=10
@@ -174,15 +170,16 @@ hitButton.addEventListener('click', ()=>{
 })
 
 function dealerMove() {
-    if (dealerTotal <= playerTotal && dealerTotal <= 21 && playerTotal < 21) {
+    while (dealerTotal <= playerTotal && dealerTotal <= 21 && playerTotal < 21) {
+        dealerTotal = 0
         let newCard = deck.pop()
         dealerHand.push(newCard);
-        if (newCard.split("-")[0]==="K" || newCard.split("-")[0]==="Q" || newCard.split("-")[0]==="J"){
-            dealerTotal += 10
-        } else if (newCard.split("-")[0]==="A"){
-            dealerTotal+=11
-        } else dealerTotal+= parseInt(newCard.split("-")[0])
-    
+        // if (newCard.split("-")[0]==="K" || newCard.split("-")[0]==="Q" || newCard.split("-")[0]==="J"){
+        //     dealerTotal += 10
+        // } else if (newCard.split("-")[0]==="A"){
+        //     dealerTotal+=11
+        // } else dealerTotal+= parseInt(newCard.split("-")[0])
+        dealerSum()
         for (let i = 0; i < dealerHand.length; i++){
             if (dealerHand[i]==="A" && dealerTotal > 21){
                 dealerTotal-=10
@@ -207,8 +204,8 @@ stayButton.addEventListener('click', ()=>{
 const winnerMessage = document.querySelector('.winner-message')
 
 function winner(){
-    console.log(playerHand)
-    console.log(playerTotal)
+    // console.log(playerHand)
+    // console.log(playerTotal)
     if (playerTotal<21 && dealerTotal < 21 && playerTotal > dealerTotal){
         winnerMessage.innerHTML = "you win!";
         balanceDOM.innerHTML = balance + 100
@@ -226,6 +223,8 @@ function winner(){
         winnerMessage.innerHTML = "you win! the dealer busted"
         balanceDOM.innerHTML = balance + 100
     }
+    // console.log(deck.length)
+
     // playerDraw()
     // dealerDraw()
     // console.log(playerHand)
@@ -233,3 +232,15 @@ function winner(){
 
 }
 
+let reset = document.querySelector('.reset')
+
+reset.addEventListener('click', ()=>{
+    wagerDOM.innerHTML = wager;
+    balanceDOM.innerHTML = balance;
+    makeDeck();
+    shuffle();
+    playerDraw()
+    dealerDraw()
+    playerSum()
+    dealerSum()
+})
