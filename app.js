@@ -87,8 +87,8 @@ function playerDraw(){
         playerHand[i] = deck.pop()
     }
     playerSum()
-    pc1.src = "./cards/" + playerHand[0] + ".png"
-    pc2.src = "./cards/" + playerHand[1] + ".png"
+    document.getElementById("pc1").src = "./cards/" + playerHand[0] + ".png"
+    document.getElementById("pc2").src = "./cards/" + playerHand[1] + ".png"
 }
 
 function dealerDraw(){
@@ -97,7 +97,7 @@ function dealerDraw(){
         dealerHand[i] = deck.pop()
     }
     dealerSum()
-    dc2.src = "./cards/" + dealerHand[1] + ".png"
+    document.getElementById("dc2").src = "./cards/" + dealerHand[1] + ".png"
     
 }
 
@@ -182,23 +182,13 @@ function dealerMove() {
         dealerTotal = 0
         let newCard = deck.pop()
         dealerHand.push(newCard);
-        // if (newCard.split("-")[0]==="K" || newCard.split("-")[0]==="Q" || newCard.split("-")[0]==="J"){
-        //     dealerTotal += 10
-        // } else if (newCard.split("-")[0]==="A"){
-        //     dealerTotal+=11
-        // } else dealerTotal+= parseInt(newCard.split("-")[0])
         dealerSum()
-        // for (let i = 0; i < dealerHand.length; i++){
-        //     if (dealerHand[i]==="A" && dealerTotal > 21){
-        //         dealerTotal-=10
-        //     }
-        // }
         var cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
         dealerSection.append(cardImg)
     } 
         winner()
-        back.src = "./cards/" + dealerHand[0] + ".png"
+        document.getElementById("back").src = "./cards/" + dealerHand[0] + ".png"
 
 }
 
@@ -236,8 +226,8 @@ function winner(){
         balanceDOM.innerHTML = balance
     }
     
-
-    // setTimeout(continueGame, 2000)
+    console.log(deck.length)
+    setTimeout(continueGame, 3000)
 
 
 }
@@ -250,6 +240,8 @@ function reset(){
     back.src = "./cards/back.png"
     playerTotal = 0
     dealerTotal = 0
+    wager = 100
+    balance = 900
     wagerDOM.innerHTML = wager;
     balanceDOM.innerHTML = balance;
     makeDeck();
@@ -259,10 +251,37 @@ function reset(){
 }
 
 function continueGame(){
-    back.src = "./cards/back.png"
+    checkBalance()
     playerTotal = 0
     dealerTotal = 0
     winnerMessage.innerHTML = ""
+    document.querySelector('.dealer-section').innerHTML = ``
+    let h2 = document.createElement("h2")
+    h2.innerText = "Dealer Hand"
+    let dc2 = document.createElement("img")
+    dc2.setAttribute("id", "dc2")
+    let back = document.createElement("img")
+    back.setAttribute("id", "back")
+    back.src = "./cards/back.png"
+    document.querySelector('.dealer-section').append(h2, back, dc2)
+    document.querySelector('.player-section').innerHTML = ``
+    let h2Player = document.createElement("h2")
+    h2Player.innerText = "Player Hand"
+    let pc1 = document.createElement("img")
+    pc1.setAttribute("id", "pc1")
+    let pc2 = document.createElement("img")
+    pc2.setAttribute("id", "pc2")
+    document.querySelector('.player-section').append(h2Player, pc1, pc2)
     playerDraw();
     dealerDraw();
+    console.log(playerHand)
+    console.log(dealerHand)
+    console.log(balance)
+}
+
+
+function checkBalance() {
+    if (balance === -100){
+        reset()
+    }
 }
