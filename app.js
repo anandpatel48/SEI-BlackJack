@@ -36,6 +36,9 @@ const hit = document.querySelector('.hit')
 const message = document.querySelector(".message")
 
 const hitButton = document.querySelector('.hit')
+
+const creditsMessage = document.querySelector('.out-of-credits')
+
 //declaring a function to open game so it can be called when the reset button is hit
 function openGame(){
     makeDeck()
@@ -147,6 +150,11 @@ hitButton.addEventListener('click', ()=>{
         let cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
         playerSection.append(cardImg)
+        if (playerTotal > 21){
+            dealerMove()
+        } else if (playerTotal === 21){
+            dealerMove()
+        }
         
     } else {
         dealerMove()
@@ -211,6 +219,7 @@ resetButton.addEventListener('click', reset)
 
 function reset(){
     document.getElementById("back").src = "./cards/back.png"
+    creditsMessage.innerHTML = ""
     playerTotal = 0
     dealerTotal = 0
     wager = 100
@@ -254,8 +263,10 @@ function continueGame(){
 }
 
 
+
 function checkBalance() {
     if (balance === -100){
-        reset()
+        creditsMessage.innerHTML = "out of credits, new game starts in 5 seconds"
+        setTimeout(reset, 5000)
     }
 }

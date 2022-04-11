@@ -39,3 +39,12 @@ button {
     font-size: 60px;
     color:aquamarine
 }
+
+h2 {
+    font-size: 40px
+}
+
+.out-of-credits {
+    font-size: 80px;
+    color: red
+}
