@@ -106,6 +106,7 @@ function dealerDraw(){
     }
     dealerSum()
     document.getElementById("dc2").src = "./cards/" + dealerHand[1] + ".png"
+    // console.log(dealerHand)
     
 }
 
