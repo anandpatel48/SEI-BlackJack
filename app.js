@@ -116,7 +116,7 @@ function playerSum(){
             playerTotal-=10
         }
     }
-    console.log(playerTotal)
+    // console.log(playerTotal)
 }
 function dealerSum(){
     for (let i = 0; i < dealerHand.length; i++){
@@ -132,7 +132,7 @@ function dealerSum(){
         }
     }
 
-    console.log(dealerTotal)
+    // console.log(dealerTotal)
 }
 
 
@@ -251,6 +251,10 @@ function reset(){
 }
 
 function continueGame(){
+    if (deck.length <=6){
+        makeDeck()
+        shuffle()
+    }
     checkBalance()
     playerTotal = 0
     dealerTotal = 0
@@ -274,9 +278,9 @@ function continueGame(){
     document.querySelector('.player-section').append(h2Player, pc1, pc2)
     playerDraw();
     dealerDraw();
-    console.log(playerHand)
-    console.log(dealerHand)
-    console.log(balance)
+    // console.log(playerHand)
+    // console.log(dealerHand)
+    // console.log(balance)
 }
 
 
