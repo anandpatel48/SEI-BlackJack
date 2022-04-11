@@ -39,6 +39,7 @@ const hitButton = document.querySelector('.hit')
 
 const creditsMessage = document.querySelector('.out-of-credits')
 
+const deckSignal = document.querySelector('.deck-signal')
 //declaring a function to open game so it can be called when the reset button is hit
 function openGame(){
     makeDeck()
@@ -67,6 +68,7 @@ function makeDeck(){
             deck.push(cards[j] + "-" + suits[i])
         }
     }
+
 
 }
 
@@ -159,7 +161,7 @@ hitButton.addEventListener('click', ()=>{
     } else {
         dealerMove()
     }  
-    
+    deckSignal.innerHTML = ""
 })
 
 
@@ -180,7 +182,8 @@ function dealerMove() {
 
 const stayButton = document.querySelector('.stay')
 
-stayButton.addEventListener('click', ()=>{   
+stayButton.addEventListener('click', ()=>{ 
+    deckSignal.innerHTML = ""  
     dealerMove()
 })
 
@@ -234,6 +237,7 @@ function reset(){
 
 function continueGame(){
     if (deck.length <=6){
+        deckSignal.innerHTML = "New Deck"
         makeDeck()
         shuffle()
     }

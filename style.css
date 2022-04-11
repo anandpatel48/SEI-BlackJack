@@ -48,3 +48,9 @@ h2 {
     font-size: 80px;
     color: red
 }
+
+.deck-signal{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 50px;
+    text-align: left
+}
