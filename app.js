@@ -180,23 +180,23 @@ const winnerMessage = document.querySelector('.winner-message')
 
 function winner(){
     if (playerTotal<21 && dealerTotal < 21 && playerTotal > dealerTotal){
-        winnerMessage.innerHTML = "you win!";
+        winnerMessage.innerHTML = "You win!";
         balance+=100
         balanceDOM.innerHTML = balance
     } else if (playerTotal > 21) {
-        winnerMessage.innerHTML = "you busted";
+        winnerMessage.innerHTML = "You Busted";
         balance -= 100
         balanceDOM.innerHTML = balance
     } else if (dealerTotal <= 21 && dealerTotal > playerTotal){
-        winnerMessage.innerHTML = "you  lose";
+        winnerMessage.innerHTML = "You Lose";
         balance -= 100
         balanceDOM.innerHTML = balance   
     } else if (playerTotal === 21){
-        winnerMessage.innerHTML = "BlackJack";
+        winnerMessage.innerHTML = "BlackJack!";
         balance += 100
         balanceDOM.innerHTML = balance
     } else if (dealerTotal > 21 && playerTotal <= 21) {
-        winnerMessage.innerHTML = "you win! the dealer busted"
+        winnerMessage.innerHTML = "You Win! The Dealer Busted"
         balance += 100
         balanceDOM.innerHTML = balance
     }
