@@ -30,7 +30,12 @@ const pc1 = document.getElementById("pc1")
 const pc2 = document.getElementById("pc2")
 const dc2 = document.getElementById("dc2")
 const back = document.getElementById("back")
+//getting hit from DOM to create a function for hit button
+const hit = document.querySelector('.hit')
+//getting message from DOM to signal player is allowed to hit or not allowed
+const message = document.querySelector(".message")
 
+const hitButton = document.querySelector('.hit')
 //declaring a function to open game so it can be called when the reset button is hit
 function openGame(){
     makeDeck()
@@ -75,9 +80,7 @@ function shuffle(){
     // console.log(deck)
 }
 
-// testing to see if deck.pop retrieves a hand
-// console.log(deck.pop())
-//pc1 and pc2 are to reflect the images for the players cards
+
 
 
 
@@ -106,7 +109,7 @@ function playerSum(){
     for (let i = 0; i < playerHand.length; i++){
         if(playerHand[i].split("-")[0]=== "K" || playerHand[i].split("-")[0]=== "Q" || playerHand[i].split("-")[0]=== "J") {
             playerTotal += 10;
-            // console.log(playerTotal)
+
         } else if(playerHand[i].split("-")[0]=== "A") {
             playerTotal += 11;
         } else playerTotal+= parseInt(playerHand[i].split("-")[0])
@@ -116,7 +119,7 @@ function playerSum(){
             playerTotal-=10
         }
     }
-    // console.log(playerTotal)
+
 }
 function dealerSum(){
     for (let i = 0; i < dealerHand.length; i++){
@@ -132,40 +135,15 @@ function dealerSum(){
         }
     }
 
-    // console.log(dealerTotal)
 }
 
 
-// playerSum()
-// dealerSum()
-
-
-
-
-// console.log(playerTotal)
-
-//getting hit from DOM to create a function for hit button
-const hit = document.querySelector('.hit')
-//getting message from DOM to signal player is allowed to hit or not allowed
-const message = document.querySelector(".message")
-// console.log(hit)
-
-
-
-
-let hitButton = document.querySelector('.hit')
-
 hitButton.addEventListener('click', ()=>{
-    playerTotal = 0
     if (playerTotal <21){
+        playerTotal = 0
         let newCard = deck.pop()
         playerHand.push(newCard);
         playerSum()
-        // for (let i = 0; i < playerHand.length; i++){
-        //     if (playerHand[i]==="A" && playerTotal > 21){
-        //         playerTotal-=10
-        //     }
-        // }
         let cardImg = document.createElement("img")
         cardImg.src = "./cards/" + newCard + ".png"
         playerSection.append(cardImg)
@@ -201,14 +179,11 @@ stayButton.addEventListener('click', ()=>{
 const winnerMessage = document.querySelector('.winner-message')
 
 function winner(){
-    // console.log(playerHand)
-    // console.log(playerTotal)
     if (playerTotal<21 && dealerTotal < 21 && playerTotal > dealerTotal){
         winnerMessage.innerHTML = "you win!";
         balance+=100
         balanceDOM.innerHTML = balance
     } else if (playerTotal > 21) {
-        // console.log(playerTotal)
         winnerMessage.innerHTML = "you busted";
         balance -= 100
         balanceDOM.innerHTML = balance
@@ -226,9 +201,7 @@ function winner(){
         balanceDOM.innerHTML = balance
     }
     
-    console.log(deck.length)
     setTimeout(continueGame, 4000)
-
 
 }
 
@@ -278,9 +251,6 @@ function continueGame(){
     document.querySelector('.player-section').append(h2Player, pc1, pc2)
     playerDraw();
     dealerDraw();
-    // console.log(playerHand)
-    // console.log(dealerHand)
-    // console.log(balance)
 }
 
 
