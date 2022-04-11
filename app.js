@@ -227,7 +227,7 @@ function winner(){
     }
     
     console.log(deck.length)
-    setTimeout(continueGame, 3000)
+    setTimeout(continueGame, 4000)
 
 
 }
@@ -237,7 +237,7 @@ let resetButton = document.querySelector('.reset')
 resetButton.addEventListener('click', reset)
 
 function reset(){
-    back.src = "./cards/back.png"
+    document.getElementById("back").src = "./cards/back.png"
     playerTotal = 0
     dealerTotal = 0
     wager = 100
