@@ -39,7 +39,16 @@ const hitButton = document.querySelector('.hit')
 
 const creditsMessage = document.querySelector('.out-of-credits')
 
+const stayButton = document.querySelector('.stay')
+
 const deckSignal = document.querySelector('.deck-signal')
+
+const winnerMessage = document.querySelector('.winner-message')
+
+const resetButton = document.querySelector('.reset')
+
+
+
 //declaring a function to open game so it can be called when the reset button is hit
 function openGame(){
     makeDeck()
@@ -88,7 +97,8 @@ function shuffle(){
 
 
 
-
+//player draw pops two cards from the deck and stores them to the player hand. 
+//The cards that are popped are shown as card pictures through the DOM changing the src of the two cards in html
 function playerDraw(){
     playerHand = []
     for (let i = 0; i < 2; i++){
@@ -99,6 +109,9 @@ function playerDraw(){
     document.getElementById("pc2").src = "./cards/" + playerHand[1] + ".png"
 }
 
+
+//the dealer does the same thing for its draw but only shows 1 card on the screen where as the other is
+//just an image of the back of the card
 function dealerDraw(){
     dealerHand = []
     for (let i = 0; i < 2; i++){
@@ -110,7 +123,9 @@ function dealerDraw(){
     
 }
 
-
+//player sum adds the total for the hand. If the hand has a king queen, or jack, the total is increased by 10
+//if the hand as an ace the default addition is 11. I do a for loop to say that if a card is and
+//the total for the hand is above 21, the total is reduced by 10 to essentially make the ace a 1.
 function playerSum(){
     for (let i = 0; i < playerHand.length; i++){
         if(playerHand[i].split("-")[0]=== "K" || playerHand[i].split("-")[0]=== "Q" || playerHand[i].split("-")[0]=== "J") {
@@ -125,8 +140,10 @@ function playerSum(){
             playerTotal-=10
         }
     }
-
+    // console.log(playerTotal)
 }
+
+//dealer sum functionality is basically the same as the player sum functionality. Need to work on this to not make it repetitive.
 function dealerSum(){
     for (let i = 0; i < dealerHand.length; i++){
         if(dealerHand[i].split("-")[0]=== "K" || dealerHand[i].split("-")[0]=== "Q" || dealerHand[i].split("-")[0]=== "J") {
@@ -140,10 +157,16 @@ function dealerSum(){
             dealerTotal-=10
         }
     }
-
+    // console.log(dealerTotal)
 }
 
-
+//this is for the hit button. If the player total from the draw is less than 21, the player is allowed to hit. 
+//The player total is set to 0, and the player is allowd to pop a new card from the deck and push it to their hand
+//The player sum function is called again and will factor in the new card this time.
+//I create an img element in the player-section of the Dom and append an image to it, which is linked to the new card
+//if the new playerTotal is over 21, the program defaults to the dealermove function.
+//if the playerTotal becomes 21, the program defaults to the dealermove function because the player has BlackJack
+//Otherwise, if the playerTotal is less than 21, the player may hit again or decide to stay
 hitButton.addEventListener('click', ()=>{
     if (playerTotal <21){
         playerTotal = 0
@@ -166,6 +189,12 @@ hitButton.addEventListener('click', ()=>{
 })
 
 
+//a while loop is used to allows the dealer to keep drawing cards while this condition is satisfied
+//the dealerTotal has to be less than or equal to the player total, the dealer total has to be less than or
+//equal to 21, and the playerTotal has to be less than 21
+//then, a similar process to the hit function follows
+//the winner function then gets called and the back of card image that shows up at first is changed so that
+//the source is linked to the first card in the dealers hand
 function dealerMove() {
     while (dealerTotal <= playerTotal && dealerTotal <= 21 && playerTotal < 21) {
         dealerTotal = 0
@@ -181,15 +210,21 @@ function dealerMove() {
 
 }
 
-const stayButton = document.querySelector('.stay')
 
+//the stay allows the player to keep their card as long as their total is at or below 21
+//The deck signal which signals a new deck's inner html is changed to blank.
+//it then instructs the dealer to make its move
 stayButton.addEventListener('click', ()=>{ 
     deckSignal.innerHTML = ""  
     dealerMove()
 })
 
-const winnerMessage = document.querySelector('.winner-message')
 
+//the winner function is called once the dealer is done making moves. The winner is decided
+//by going through the following win conditions.
+//The winner is displayed through the winnerMessage in the DOM.
+//balance is either increased or decreased by 100 depending on if the player won or lost
+//Then, after displaying the winner for 4 seconds, the continue game function is called.
 function winner(){
     if (playerTotal<21 && dealerTotal < 21 && playerTotal > dealerTotal){
         winnerMessage.innerHTML = "You win!";
@@ -217,10 +252,14 @@ function winner(){
 
 }
 
-let resetButton = document.querySelector('.reset')
 
 resetButton.addEventListener('click', reset)
 
+//the reset button allows the playet to reset the game.
+//The dealer card 1 image is set back to the back of the card
+//all messages are set to blank except for New Deck which alerts the player that a new deck is being played
+//player and dealer totals are set to 0, and balance and wager are reset.
+//Then a deck is made, shuffled, the dealer and player draw their cards and a new game starts
 function reset(){
     document.getElementById("back").src = "./cards/back.png"
     creditsMessage.innerHTML = ""
@@ -237,6 +276,13 @@ function reset(){
     dealerDraw()
 }
 
+//this function is used to continue an ongoing game.
+//If the deck length is less than or equal to 6, the player is alerted that a new deck is coming in and a 
+//new deck is made and shuffled.
+//A check balance function is used to make sure that the player still has enough credits to play, otherwise, the reset
+//function is called
+//Then there is a series of steps to reset the DOM to how it was originally so the existing cards would leave and new cards
+//would show up once the player and dealer draw.
 function continueGame(){
     if (deck.length <=6){
         deckSignal.innerHTML = "New Deck"
@@ -269,7 +315,11 @@ function continueGame(){
 }
 
 
-
+//the checkBalance function checks to see if the balance is = to -100. This is because the player starts with 1000,
+//but automatically wagers 100. Balance + wager = total. Everytime the player is at 0 balance and 100 wager, that is their
+//last hand if they lose, and if they lose balance would become -100.
+//In this case, a message displays telling their player they are out of credits and that in 5 seconds a new game would start.
+//The reset function is called after 5 seconds.
 function checkBalance() {
     if (balance === -100){
         creditsMessage.innerHTML = "out of credits, new game starts in 5 seconds"
