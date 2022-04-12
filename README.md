@@ -36,7 +36,7 @@ I mainly used Javascript for the functionality of the game. I used loops and con
 display the cards, change the balance, and display messages through dom manipulation. 
 
 ## Link to Game
-
+https://anandpatel48.github.io/SEI-BlackJack/
 
 ## Next Steps
 There are a few things I plan to do with this game. I would first like to add animations for the cards being dealt out. I would also like to add an animation for the dealer flipping their face down card and an animation for discarding of the cards.
