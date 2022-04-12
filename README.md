@@ -10,6 +10,19 @@ goes above 21, they "bust" and lose the round. For this game, if the player bust
 
 ## Game pictures.
 
+<img width="1476" alt="Screen Shot 2022-04-12 at 9 53 03 AM" src="https://user-images.githubusercontent.com/101526418/162982152-bc4d3c20-a766-40b1-9058-02930d555722.png">
+This is how the game is first displayed. Wager is 100, balance is 900 making for a total of 100. Cards are dealt out and the player can decide to hit or stay. 
+
+<img width="1458" alt="Screen Shot 2022-04-12 at 9 51 50 AM" src="https://user-images.githubusercontent.com/101526418/162982399-1628c97d-c4cd-4332-b9fe-b72e702ad94d.png">
+This shows how a winner is determined. In this case, the user lost because the dealer had 21 and the player only had 18, resulting in the message "You lost" and the balance being reduced by 100.
+
+<img width="1476" alt="Screen Shot 2022-04-12 at 9 53 03 AM" src="https://user-images.githubusercontent.com/101526418/162982717-dcfbb67e-ac6b-41fd-aa7c-c91ce167b142.png">
+This shows the situation where the player has ran out of credits. The message alerting the player appears, and in 5 seconds the game will reset.
+
+<img width="1484" alt="Screen Shot 2022-04-12 at 9 53 23 AM" src="https://user-images.githubusercontent.com/101526418/162982905-66aa502f-76bd-4018-aea9-64147f9638dd.png">
+This shows when the game is reset, the message "New Deck" appears to alert the player that a new shuffled deck is being used. A similar message would appear if the deck ever got to 6 or less cards and the player was in the middle of a round. 
+
+
 
 ## Technologies Used
 I used HTML to create the basic display of the game. I used buttons for the hit stay and reset buttons and made a table to display the wager and balance.
