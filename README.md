@@ -9,17 +9,20 @@ The new card is added to the total of the players hand. The player can also deci
 goes above 21, they "bust" and lose the round. For this game, if the player busts they automatically lose. If the player does not bust and the dealer does, the player wins. 
 
 ## Game pictures.
+<img width="1499" alt="Screen Shot 2022-04-12 at 9 51 18 AM" src="https://user-images.githubusercontent.com/101526418/162983485-9a544e3a-e177-4a97-bb28-d198b14c36a3.png">
 
-<img width="1476" alt="Screen Shot 2022-04-12 at 9 53 03 AM" src="https://user-images.githubusercontent.com/101526418/162982152-bc4d3c20-a766-40b1-9058-02930d555722.png">
 This is how the game is first displayed. Wager is 100, balance is 900 making for a total of 100. Cards are dealt out and the player can decide to hit or stay. 
 
 <img width="1458" alt="Screen Shot 2022-04-12 at 9 51 50 AM" src="https://user-images.githubusercontent.com/101526418/162982399-1628c97d-c4cd-4332-b9fe-b72e702ad94d.png">
+
 This shows how a winner is determined. In this case, the user lost because the dealer had 21 and the player only had 18, resulting in the message "You lost" and the balance being reduced by 100.
 
 <img width="1476" alt="Screen Shot 2022-04-12 at 9 53 03 AM" src="https://user-images.githubusercontent.com/101526418/162982717-dcfbb67e-ac6b-41fd-aa7c-c91ce167b142.png">
+
 This shows the situation where the player has ran out of credits. The message alerting the player appears, and in 5 seconds the game will reset.
 
 <img width="1484" alt="Screen Shot 2022-04-12 at 9 53 23 AM" src="https://user-images.githubusercontent.com/101526418/162982905-66aa502f-76bd-4018-aea9-64147f9638dd.png">
+
 This shows when the game is reset, the message "New Deck" appears to alert the player that a new shuffled deck is being used. A similar message would appear if the deck ever got to 6 or less cards and the player was in the middle of a round. 
 
 
