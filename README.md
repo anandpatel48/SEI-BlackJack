@@ -35,54 +35,11 @@ I used CSS to style the game, changing font sizes and colors and to give the gam
 I mainly used Javascript for the functionality of the game. I used loops and conditionals to create the logic of the game. I used a nested loop to create a deck and then used a for loop to shuffle it. I was also able to 
 display the cards, change the balance, and display messages through dom manipulation. 
 
-## Tough Code Parts
-function playerSum(){
-    for (let i = 0; i < playerHand.length; i++){
-        if(playerHand[i].split("-")[0]=== "K" || playerHand[i].split("-")[0]=== "Q" || playerHand[i].split("-")[0]=== "J") {
-            playerTotal += 10;
+## Challenging Code Parts
 
-        } else if(playerHand[i].split("-")[0]=== "A") {
-            playerTotal += 11;
-        } else playerTotal+= parseInt(playerHand[i].split("-")[0])
-    }
-    for (let i = 0; i < playerHand.length; i++){
-        if (playerHand[i].split("-")[0] ==="A" && playerTotal > 21){
-            playerTotal-=10
-        }
-    }
-    // console.log(playerTotal)
-}
+![Screen Shot 2022-04-13 at 9 09 41 AM](https://user-images.githubusercontent.com/101526418/163187329-abbe3d7b-7aa0-4190-8ab3-12a6add5db6d.png)
 
-function continueGame(){
-    if (deck.length <=6){
-        deckSignal.innerHTML = "New Deck"
-        makeDeck()
-        shuffle()
-    }
-    checkBalance()
-    playerTotal = 0
-    dealerTotal = 0
-    winnerMessage.innerHTML = ""
-    document.querySelector('.dealer-section').innerHTML = ``
-    let h2 = document.createElement("h2")
-    h2.innerText = "Dealer Hand"
-    let dc2 = document.createElement("img")
-    dc2.setAttribute("id", "dc2")
-    let back = document.createElement("img")
-    back.setAttribute("id", "back")
-    back.src = "./cards/back.png"
-    document.querySelector('.dealer-section').append(h2, back, dc2)
-    document.querySelector('.player-section').innerHTML = ``
-    let h2Player = document.createElement("h2")
-    h2Player.innerText = "Player Hand"
-    let pc1 = document.createElement("img")
-    pc1.setAttribute("id", "pc1")
-    let pc2 = document.createElement("img")
-    pc2.setAttribute("id", "pc2")
-    document.querySelector('.player-section').append(h2Player, pc1, pc2)
-    playerDraw();
-    dealerDraw();
-}
+![Screen Shot 2022-04-13 at 9 10 09 AM](https://user-images.githubusercontent.com/101526418/163187436-72465193-86fc-49fb-94e0-e9db24a2fa37.png)
 
 
 
